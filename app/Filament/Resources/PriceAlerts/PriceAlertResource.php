@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Filament\Resources\PriceAlerts;
+
+use App\Filament\Resources\PriceAlerts\Pages;
+use App\Filament\Resources\PriceAlerts\Schemas\PriceAlertForm;
+use App\Filament\Resources\PriceAlerts\Tables\PriceAlertsTable;
+use App\Models\PriceAlert;
+use BackedEnum;
+use UnitEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+
+class PriceAlertResource extends Resource
+{
+    protected static ?string $model = PriceAlert::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBellAlert;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Pricing';
+
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $navigationLabel = 'Price Alerts';
+
+    public static function form(Schema $schema): Schema
+    {
+        return PriceAlertForm::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return PriceAlertsTable::configure($table);
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListPriceAlerts::route('/'),
+            'edit'  => Pages\EditPriceAlert::route('/{record}/edit'),
+        ];
+    }
+}

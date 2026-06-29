@@ -1,0 +1,56 @@
+/* resources/css/app.css */
+@import "tailwindcss";
+
+/* Tell Tailwind v4 where to find class names */
+@source "../**/*.blade.php";
+@source "../**/*.{js,jsx}";
+@source "../../storage/framework/views/*.php";
+
+/* Custom Theme Tokens (Tailwind v4 CSS-first config) */
+@theme {
+  --color-obsidian:   #0D0D0D;
+  --color-gold:       #C9A84C;
+  --color-gold-light: #F0D98B;
+  --color-gold-dark:  #9A7A2E;
+  --color-ivory:      #F8F6F1;
+  --color-ink:        #1A1A1A;
+  --color-ash:        #6B6B6B;
+
+  --font-family-display: "Playfair Display", Georgia, serif;
+  --font-family-body:    "Inter", system-ui, sans-serif;
+  --font-family-mono:    "JetBrains Mono", monospace;
+}
+
+/* Base Styles */
+@layer base {
+  html { font-family: var(--font-family-body); }
+  h1, h2, h3, .font-display { font-family: var(--font-family-display); }
+  .font-mono { font-family: var(--font-family-mono); }
+
+  * { box-sizing: border-box; }
+  body { background-color: var(--color-ivory); color: var(--color-ink); }
+}
+
+/* Custom components */
+@layer components {
+  .btn-primary {
+    @apply bg-gold text-obsidian font-semibold px-6 py-3 rounded
+           hover:bg-gold-dark transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2;
+  }
+  .btn-dark {
+    @apply bg-obsidian text-ivory font-semibold px-6 py-3 rounded
+           hover:bg-ink transition-colors duration-200;
+  }
+  .card {
+    @apply bg-ivory rounded-lg border border-gray-100
+           hover:shadow-xl hover:shadow-gold/10 transition-all duration-300;
+  }
+  .rating-bar {
+    @apply h-2 bg-gray-200 rounded-full overflow-hidden;
+  }
+  .rating-bar-fill {
+    @apply h-full bg-gold rounded-full transition-all duration-500;
+  }
+}
+
